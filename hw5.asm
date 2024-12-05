@@ -54,6 +54,40 @@ piece_done:
 
 printBoard:
     # Function prologue
+    la $t0, board
+    li $t1, board_height    # row
+    li $t2, board_width     # col
+
+    li $t3, 0               # i = 0
+
+    row_loop:
+        li $t4, 0           # j = 0
+
+    col_loop:
+        mul $t5, $t3, $t2   # i * col
+        add $t5, $t5, $t4   # i * col + j
+        add $t5, $t5, $t0   # board_address + 1 * (i * col + j)
+        lb $a0, 0($t5)
+        li $v0, 11
+        syscall
+        li $a0, ' '
+        li $v0, 11
+        syscall
+
+        adddi $t4, $t4, 1           # j++
+        blt  $t4, $t2, col_loop     # j < col?
+
+    col_done:
+        addi $t3, $t3, 1    # i++
+        li $a0, '\n'
+        li $v0, 11
+        syscall
+        blt  $t3, $t1, row_loop     # i < row?
+    
+    row_done:
+        li $a0, '\n'
+        li $v0, 11
+        syscall
 
     # Function epilogue
     
