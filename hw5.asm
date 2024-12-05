@@ -55,8 +55,8 @@ piece_done:
 printBoard:
     # Function prologue
     la $t0, board
-    li $t1, board_height    # row
-    li $t2, board_width     # col
+    lw $t1, board_height    # row
+    lw $t2, board_width     # col
 
     li $t3, 0               # i = 0
 
@@ -74,7 +74,7 @@ printBoard:
         li $v0, 11
         syscall
 
-        adddi $t4, $t4, 1           # j++
+        addi $t4, $t4, 1           # j++
         blt  $t4, $t2, col_loop     # j < col?
 
     col_done:
