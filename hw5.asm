@@ -28,8 +28,8 @@ zeroOut:
         mul $t5, $t3, $t2   # i * col
         add $t5, $t5, $t4   # i * col + j
         add $t5, $t5, $t0   # board_address + 1 * (i * col + j)
-        li $t6, '0'
-        sb $t6, 0($t5)
+        li $t6, '\n'
+        sb $t6, 0($t5)      # store 0 into the board
 
         addi $t4, $t4, 1           # j++
         blt  $t4, $t2, zero_c_loop     # j < col?
