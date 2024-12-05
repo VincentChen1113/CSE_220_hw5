@@ -68,7 +68,7 @@ printBoard:
         add $t5, $t5, $t4   # i * col + j
         add $t5, $t5, $t0   # board_address + 1 * (i * col + j)
         lb $a0, 0($t5)
-        li $v0, 11
+        li $v0, 1
         syscall
         li $a0, ' '
         li $v0, 11
