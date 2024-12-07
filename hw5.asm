@@ -89,7 +89,7 @@ printBoard:
         mul $t5, $t3, $t2   # i * col
         add $t5, $t5, $t4   # i * col + j
         add $t5, $t5, $t0   # board_address + 1 * (i * col + j)
-        lb $a0, 0($t5)
+        lb $a0, 0($t5)      # print byte
         li $v0, 1
         syscall
         li $a0, ' '
@@ -125,7 +125,40 @@ printBoard:
 # Uses global variables: board (char[]), board_width (int), board_height (int)
 
 place_tile:
+    la $t0, board
+    lw $t1, board_height    # row
+    lw $t2, board_width     # col
+
+# Check if row or column if out of board
+    bge $a0, $t1, tile_error_2	# if row >= board_height
+    bge $a1, $t2, tile_error_2	# if col >= board_width
+    bltz $a0, tile_error_2		# if row < 0
+    bltz $a1, tile_error_2		# if col < 0
+
+# Calculate the address of board[row][col]
+    mul $t3, $a0, $t2		# $t3 = row * width
+    add $t3, $t3, $a1		# $t3 = row * width + col
+    add $t3, $t0, $t3		# $t3 = board_address + row * width + col 
+
+# Check if the cell is occupied
+    lb $t4, 0($t3)			# $t4 = board[row][col]
+    li $t5, '\0'
+    bne $t4, $t5, tile_error_1	# if board[row][col] != 0
+
+# Set value to the cell
+    sb $a2, 0($t3)			# board[row][col] == 0 board[ row ] [ col ] = value
+    li $v0, 0
     jr $ra
+
+tile_error_1:
+	li $v0, 1
+	jr $ra
+
+
+tile_error_2:
+	li $v0,2
+	jr $ra
+
 
 # Function: test_fit
 # Arguments: 
