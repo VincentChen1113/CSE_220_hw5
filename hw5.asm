@@ -49,7 +49,7 @@ zero_done:
 placePieceOnBoard:
     # Function prologue
 
-    lw $t0, 0($a0)      #load type
+    lw $s3, 0($a0)      #load type
     lw $s4, 4($a0)      #load orientation
     lw $s5, 8($a0)      #load row_loc
     lw $s6, 12($a0)     #load col_loc
