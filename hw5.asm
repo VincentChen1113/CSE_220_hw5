@@ -231,10 +231,10 @@ test_fit:
 
     ship_loop:
         bge $t0, $t1, loop_end
-        lw $t2, 0($t1)              # type       
-        lw $t3, 4($t1)              # orientation
+        lw $t2, 0($t0)              # type       
+        lw $t3, 4($t0)              # orientation
 
-        addi $t1, $t1, 16
+        addi $t0, $t0, 16
 
         li $t6, 8
         bge $t2, $t6, fit_error     # check type
@@ -247,8 +247,10 @@ test_fit:
         j ship_loop
 
 
-    loop_end:
-    jr $ra
+loop_end:
+
+
+jr $ra
 
     fit_error:
     li $v0, 4
