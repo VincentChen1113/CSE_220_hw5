@@ -228,11 +228,6 @@ test_fit:
     # Function prologue
     jr $ra
 
-
-T_orientation4:
-    # Study the other T orientations in skeleton.asm to understand how to write this label/subroutine
-    j piece_done
-
 T_orientation4:
     move $a0, $s5          # row
     move $a1, $s6          # col
