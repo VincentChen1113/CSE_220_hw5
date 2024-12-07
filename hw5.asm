@@ -50,13 +50,15 @@ zero_done:
 #   $a1 - ship_num
 placePieceOnBoard:
     # Function prologue
+    addi $sp, $sp, -4
+    sw $ra, 0($sp)
 
     lw $s3, 0($a0)      #load type
     lw $s4, 4($a0)      #load orientation
     lw $s5, 8($a0)      #load row_loc
     lw $s6, 12($a0)     #load col_loc
     move $s1, $a1       #copy ship_num to $s1
-    li $s2, 0
+    li $s2, 0           #set $s2 to 0
 
     # Load piece fields
     # First switch on type
@@ -77,6 +79,8 @@ placePieceOnBoard:
     j piece_done       # Invalid type
 
 piece_done:
+    lw $ra, 0($sp)
+    addi $sp, $sp, 4
     li $t1, 1
     li $t2, 2
     li $t3, 3
@@ -87,19 +91,16 @@ piece_done:
     jr $ra
 
 occupied_error_1:
-    li $s2, 0   #reset $s2 to 0
     jal zeroOut
     li $v0, 1
     jr $ra
 
 out_of_board_error_2:
-    li $s2, 0   #reset $s2 to 0
     jal zeroOut
     li $v0, 2
     jr $ra
 
 error_3:
-    li $s2, 0   #reset $s2 to 0
     jal zeroOut
     li $v0, 3
     jr $ra
