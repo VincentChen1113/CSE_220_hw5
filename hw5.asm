@@ -91,17 +91,38 @@ piece_done:
     jr $ra
 
 occupied_error_1:
+    addi $sp, $sp, -4
+    sw $ra, 0($sp)
+
     jal zeroOut
+
+    lw $ra, 0($sp)
+    addi $sp, $sp, 4
+
     li $v0, 1
     jr $ra
 
 out_of_board_error_2:
+    addi $sp, $sp, -4
+    sw $ra, 0($sp)
+
     jal zeroOut
+
+    lw $ra, 0($sp)
+    addi $sp, $sp, 4
+
     li $v0, 2
     jr $ra
 
 error_3:
+    addi $sp, $sp, -4
+    sw $ra, 0($sp)
+
     jal zeroOut
+    
+    lw $ra, 0($sp)
+    addi $sp, $sp, 4
+    
     li $v0, 3
     jr $ra
 
