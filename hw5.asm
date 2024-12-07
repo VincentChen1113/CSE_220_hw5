@@ -226,7 +226,35 @@ tile_error_2:
 #   $a0 - address of piece array (5 pieces)
 test_fit:
     # Function prologue
+    li $t0, 0   # i = 0
+    li $t1, 80   # max 5 * 16
+
+    ship_loop:
+        bge $t0, $t1, loop_end
+        lw $t2, 0($t1)              # type       
+        lw $t3, 4($t1)              # orientation
+
+        addi $t1, $t1, 16
+
+        li $t6, 8
+        bge $t2, $t6, fit_error     # check type
+        blez $t2, fit_error
+
+        li $t6, 5
+        bge $t3, $t6, fit_error     # check orientation
+        blez $t3, fit_error
+
+        j ship_loop
+
+
+    loop_end:
     jr $ra
+
+    fit_error:
+    li $v0, 4
+    jr $ra
+
+
 
 T_orientation4:
     move $a0, $s5          # row
