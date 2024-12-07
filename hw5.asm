@@ -49,6 +49,12 @@ zero_done:
 placePieceOnBoard:
     # Function prologue
 
+    lw $t0, 0($a0)      #load type
+    lw $s4, 4($a0)      #load orientation
+    lw $s5, 8($a0)      #load row_loc
+    lw $s6, 12($a0)     #load col_loc
+    move $s1, $a1       #copy ship_num to $s1
+
     # Load piece fields
     # First switch on type
     li $t0, 1
@@ -68,7 +74,30 @@ placePieceOnBoard:
     j piece_done       # Invalid type
 
 piece_done:
+    li $t1, 1
+    li $t2, 2
+    li $t3, 3
+    beq $s2, $t1, occupied_error_1
+    beq $s2, $t2, out_of_board_error_2
+    beq $s2, $t3, error_3
+    li $v0, 0
     jr $ra
+
+occupied_error_1:
+    jal zeroOut
+    li $v0, 1
+    jr $ra
+
+out_of_board_error_2:
+    jal zeroOut
+    li $v0, 2
+    jr $ra
+
+error_3:
+    jal zeroOut
+    li $v0, 3
+    jr $ra
+
 # Function: printBoard
 # Arguments: None (uses global variables)
 # Returns: void
