@@ -20,6 +20,8 @@ zeroOut:
     lw $t2, board_width     # col
 
     li $t3, 0               # i = 0
+    li $t4, 0
+    li $t5, 0
 
     zero_r_loop:
         li $t4, 0           # j = 0
@@ -110,6 +112,9 @@ printBoard:
     lw $t2, board_width     # col
 
     li $t3, 0               # i = 0
+    li $t4, 0
+    li $t5, 0
+    li $t6, 0
 
     row_loop:
         li $t4, 0           # j = 0
