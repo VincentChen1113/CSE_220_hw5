@@ -282,7 +282,7 @@ ship_loop_end:
 
         beq $v0, $t3, fit_error1
         beq $v0, $t4, fit_error2
-        beq $v0, $t5, fit_error5
+        beq $v0, $t5, fit_error3
 
         addi $t0, $t0, 1        # i++
         addi $a0, $a0, 16
