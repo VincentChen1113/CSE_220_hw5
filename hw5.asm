@@ -231,8 +231,9 @@ test_fit:
 
     ship_loop:
         bge $t0, $t1, loop_end
-        lw $t2, 0($t0)              # type       
-        lw $t3, 4($t0)              # orientation
+        add $t4, $t0, $a0
+        lw $t2, 0($t4)              # type       
+        lw $t3, 4($t4)              # orientation
 
         addi $t0, $t0, 16
 
