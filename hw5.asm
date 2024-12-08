@@ -257,9 +257,8 @@ ship_loop_end:
     li $t6, 0
 
     put_loop:
-        bge $t0, $t1, put_loop_end
-        addi $t3, $t0, 1       # ship number
-        move $a1, $t3
+        bge $t0, $t1, put_loop_end       
+        move $a1, $t0               # ship number
 
         addi $sp, $sp, -4
         sw $ra, 0($sp)
