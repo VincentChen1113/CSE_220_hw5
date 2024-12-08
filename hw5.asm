@@ -257,7 +257,7 @@ ship_loop_end:
     li $t6, 0
 
     put_loop:
-        bge $t0, $t1, put_loop_end       
+        #bge $t0, $t1, put_loop_end       
         move $a1, $t0               # ship number
         
         addi $sp, $sp, -4
@@ -271,8 +271,24 @@ ship_loop_end:
         addi $t0, $t0, 1        # i++
         addi $a0, $a0, 16
 
+        #j put_loop
 
-        j put_loop
+    put_loop2:
+        #bge $t0, $t1, put_loop_end       
+        move $a1, $t0               # ship number
+        
+        addi $sp, $sp, -4
+        sw $ra, 0($sp)
+
+        jal placePieceOnBoard
+
+        lw $ra, 0($sp)
+        addi $sp, $sp, 4
+
+        addi $t0, $t0, 1        # i++
+        addi $a0, $a0, 16
+
+        #j put_loop2
 
 put_loop_end:
     li $v0, 0       
