@@ -269,7 +269,7 @@ ship_loop_end:
         addi $sp, $sp, 4
 
         addi $t0, $t0, 1        # i++
-        addi $a0, $a0, 4
+        addi $a0, $a0, 1
 
         move $a1, $t0
 
