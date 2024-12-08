@@ -251,7 +251,7 @@ test_fit:
 ship_loop_end:
     li $t0, 1   #i = 0
     li $t1, 6
-    li $t2, 0
+    move $t2, $a0
     li $t3, 0
     li $t4, 0
     li $t6, 0
@@ -259,7 +259,8 @@ ship_loop_end:
     put_loop:
         bge $t0, $t1, put_loop_end       
         move $a1, $t0               # ship number
-
+        move $a0, $t2
+        
         addi $sp, $sp, -4
         sw $ra, 0($sp)
 
@@ -269,7 +270,8 @@ ship_loop_end:
         addi $sp, $sp, 4
 
         addi $t0, $t0, 1        # i++
-        addi $a0, $a0, 16
+        addi $t2, $a0, 16
+
 
         j put_loop
 
