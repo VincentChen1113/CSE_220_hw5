@@ -230,7 +230,7 @@ test_fit:
     li $t1, 80   # max 5 * 16
 
     ship_loop:
-        bge $t0, $t1, loop_end
+        bge $t0, $t1, ship_loop_end
         add $t4, $t0, $a0
         lw $t2, 0($t4)              # type       
         lw $t3, 4($t4)              # orientation
