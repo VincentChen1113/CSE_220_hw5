@@ -249,7 +249,7 @@ test_fit:
 
 
 ship_loop_end:
-    li $t0, 1   #i = 0
+    li $t0, 1   #i = 1
     li $t1, 6
     li $t2, 0
     li $t3, 0
@@ -260,15 +260,21 @@ ship_loop_end:
         bge $t0, $t1, put_loop_end       
         move $a1, $t0               # ship number
         
-        addi $sp, $sp, -8
+        addi $sp, $sp, -20
         sw $ra, 0($sp)
         sw $a0, 4($sp)
+        sw $a1, 8($sp)
+        sw $t0, 12($sp)
+        sw $t1, 16($sp)
 
         jal placePieceOnBoard
 
+        lw $t1, 16($sp)
+        lw $t0, 12($sp)
+        lw $a1, 8($sp)
         lw $a0, 4($sp)
         lw $ra, 0($sp)
-        addi $sp, $sp, 8
+        addi $sp, $sp, 12
 
         addi $t0, $t0, 1        # i++
         addi $a0, $a0, 16
