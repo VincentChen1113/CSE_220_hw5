@@ -298,15 +298,15 @@ fit_error:
     jr $ra
 
 fit_error1:
-    li $vo, 1
+    li $v0, 1
     jr $ra
 
 fit_error2:
-    li $vo, 2
+    li $v0, 2
     jr $ra
 
 fit_error3:
-    li $vo, 3
+    li $v0, 3
     jr $ra
 
 
