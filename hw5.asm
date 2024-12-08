@@ -269,12 +269,20 @@ ship_loop_end:
 
         jal placePieceOnBoard
 
+        li $t3, 1
+        li $t4, 2
+        li $t5, 3
+
         lw $t1, 16($sp)
         lw $t0, 12($sp)
         lw $a1, 8($sp)
         lw $a0, 4($sp)
         lw $ra, 0($sp)
         addi $sp, $sp, 12
+
+        beq $v0, $t3, fit_error1
+        beq $v0, $t4, fit_error2
+        beq $v0, $t5, fit_error5
 
         addi $t0, $t0, 1        # i++
         addi $a0, $a0, 16
@@ -289,6 +297,17 @@ fit_error:
     li $v0, 4
     jr $ra
 
+fit_error1:
+    li $vo, 1
+    jr $ra
+
+fit_error2:
+    li $vo, 2
+    jr $ra
+
+fit_error3:
+    li $vo, 3
+    jr $ra
 
 
 T_orientation4:
