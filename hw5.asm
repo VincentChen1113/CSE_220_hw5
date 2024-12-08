@@ -248,12 +248,37 @@ test_fit:
         j ship_loop
 
 
-loop_end:
+ship_loop_end:
+    li $t0, 1   #i = 0
+    li $t1, 6
+    li $t2, 0
+    li $t3, 0
+    li $t4, 0
+    li $t6, 0
 
+    put_loop:
+        bge $t0, $t1, put_loop_end
+        mul $t2, $t0, 16       # get the address of ship
+        move $a0, $t2
+        addi $t3, $t0, 1       # ship number
+        move $a1, $t3
 
-jr $ra
+        addi $sp, $sp, -4
+        sw $ra, 0($sp)
 
-    fit_error:
+        placePieceOnBoard
+
+        lw $ra, 0($sp)
+        addi $sp, $sp, 4
+
+        addi $t0, $t0, 1        # i++
+
+        j put loop
+
+put_loop_end:
+    jr $ra
+
+fit_error:
     li $v0, 4
     jr $ra
 
