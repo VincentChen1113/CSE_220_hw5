@@ -271,7 +271,17 @@ ship_loop_end:
         addi $t0, $t0, 1        # i++
         addi $a0, $a0, 16
 
-        j put_loop
+        move $a1, $t0
+
+        addi $sp, $sp, -4
+        sw $ra, 0($sp)
+
+        jal placePieceOnBoard
+
+        lw $ra, 0($sp)
+        addi $sp, $sp, 4
+
+        
 
 
 put_loop_end:
